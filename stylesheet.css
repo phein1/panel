@@ -1,0 +1,110 @@
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #202529;
+            color: white;
+        }
+        header {
+            background-color: #4C555C;
+            color: white;
+            padding: 1em;
+            text-align: left;
+            width: 100%;
+        }
+        .site-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .content-wrapper {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+        }
+        .sidebar {
+            background-color: #32383D;
+            color: white;
+            text-align: center;
+            width: 200px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            padding: 0.5em 1em;
+            display: block;
+            text-align: left;
+        }
+        .sidebar a:hover {
+            background-color: #D9415D;
+        }
+        .sidebar a.active {
+            background-color: #D9415D;
+        }
+        .content {
+            display: none;
+            padding: 20px;
+            flex: 1;
+        }
+        button {
+            padding: 10px;
+            background-color: #D9415D;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #D9415D;
+        }
+        .report-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .report-list li {
+            margin-bottom: 10px;
+        }
+        .highlighted {
+            background-color: #D9415D;
+        }
+
+        .fetch-link-button {
+            padding: 10px;
+            background-color: #233559;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+        .fetch-link-button:hover {
+            background-color: #233559;
+        }
+        .delete-button {
+            padding: 10px;
+            background-color: #D9415D;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .delete-button:hover {
+            background-color: #D9415D;
+        }
+
+        input[type="text"], select {
+            border-radius: 50px;
+            padding: 5px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
